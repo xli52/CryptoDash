@@ -1,0 +1,68 @@
+.navbar {
+  // Position nav bar at the top of screen
+  position:absolute;
+  top:0%;
+  width: 100%;
+  z-index: 9;
+
+  // Align nav bar items
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 1rem 3rem;
+  border-bottom: 1px solid #E2E2E2;
+
+  .logo {
+    cursor: pointer;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #333;
+  }
+
+  .searchbar {
+    border-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    border: solid 1px rgb(131, 131, 131);
+
+    &-icon {
+      font-size: 1.1rem;
+      margin-right: 0.5rem;
+      color: gray;
+    }
+
+    &-input {
+      font-size: 1.1rem;
+      width: 40vw;
+      border: none;
+
+      &:focus{
+        outline: none;
+      }
+    }
+  }
+
+  .menu {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    &-username {
+      margin-right: 0.5rem;
+      font-size: 1.1rem;
+    }
+
+    &-profile {
+      width: 1.2rem;
+      height: 1.2rem;
+      padding: 0.5rem;
+      border-radius: 50%;
+      color: #555;
+      border: solid 1px #333;
+    }
+  }
+}
