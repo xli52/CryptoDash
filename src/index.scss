@@ -12,6 +12,17 @@ html {
 
 body {
   font-family: 'Nunito', sans-serif;
+
+  ::-webkit-scrollbar {
+    background-color: #ffffff;
+    width: 10px; 
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 20px;
+    border: 2px solid #ffffff;
+  }
 }
 
 #root {

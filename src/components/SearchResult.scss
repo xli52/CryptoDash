@@ -1,0 +1,31 @@
+.result-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.7rem 1rem;
+  background-color: #ffffff;
+  border-bottom: solid 1px #E2E2E2;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #E2E2E2;
+  }
+
+  .coin-info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    .coin-thumb {
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      margin-right: 0.5rem;
+    }
+  }
+
+  .coin-ranking {
+    color:gray;
+  }
+}
