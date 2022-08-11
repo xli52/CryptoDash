@@ -19,23 +19,26 @@ export default function Nav() {
   }
 
   function createList(coins) {
-    const list = coins.map(coin => {
-      return (
-        <SearchResult
-          key={coin.id}
-          id={coin.id}
-          name={coin.name}
-          symbol={coin.symbol}
-          thumb={coin.thumb}
-          rank={coin.market_cap_rank}
-        />
-      );
-    });
-    setList(list);
+    if (coins.length === 0) {
+      setList([<SearchResult empty />]);
+    }
+    if (coins.length > 0) {
+      const list = coins.map(coin => {
+        return (
+          <SearchResult
+            key={coin.id}
+            coin={coin}
+            show
+          />
+        );
+      });
+      setList(list);
+    }
   }
 
   useEffect(() => {
     if (value) {
+      setList([<SearchResult loading />]);
       axios({
         method: 'GET',
         url: `https://api.coingecko.com/api/v3/search?query=${value}`
