@@ -20,10 +20,10 @@ export default function Nav() {
 
   function createList(coins) {
     const list = coins.map(coin => {
-      console.log(coin);
       return (
         <SearchResult
           key={coin.id}
+          id={coin.id}
           name={coin.name}
           symbol={coin.symbol}
           thumb={coin.thumb}
