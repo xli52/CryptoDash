@@ -1,12 +1,37 @@
 import React, { useEffect, useState } from "react";
 import { useData } from "../contexts/DataContext";
+import axios from "axios";
 import './PriceTable.scss';
 
 export default function PriceTable() {
 
   const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-  const { data, currency } = useData();
+  const { data, setData, currency, setCurrency } = useData();
   const [table, setTable] = useState([]);
+
+  function handleChange(e) {
+    const newCurrency = e.target.value;
+    setCurrency(newCurrency);
+
+    if (data.prices) {
+      axios({
+        method: 'GET',
+        url: `https://api.coingecko.com/api/v3/coins/${data.id}/market_chart?vs_currency=${newCurrency}&days=7&interval=daily`
+      })
+        .then(res => {
+          setData({
+            id: data.id,
+            name: data.name,
+            symbol: data.symbol,
+            thumb: data.thumb,
+            prices: res.data.prices.reverse()
+          });
+        })
+        .catch(e => {
+          console.error(e);
+        })
+    }
+  }
 
   useEffect(() => {
     if (data.prices) {
@@ -49,7 +74,7 @@ export default function PriceTable() {
         </tr>
       ]);
     }
-  }, [data, currency]);
+  }, [data]);
 
   return (
     <main className="main-content">
@@ -60,9 +85,15 @@ export default function PriceTable() {
             {`${data.name} (${data.symbol})`}
           </h1>
         }
-        <h2 className="table-title">
-          {`7-day Price History${data.prices ? ` (${data.symbol}/${currency.toUpperCase()})` : ''} `}
-        </h2>
+        <div className="table-topbar">
+          <h2 className="table-title">
+            {`7-day Price History${data.prices ? ` (${data.symbol}/${currency.toUpperCase()})` : ''} `}
+          </h2>
+          <select className="currency-seletor" onChange={handleChange}>
+            <option value="usd">USD</option>
+            <option value="cad">CAD</option>
+          </select>
+        </div>
         <table className="price-table">
           <thead>
             <tr className="table-header">

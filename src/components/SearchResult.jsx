@@ -23,8 +23,8 @@ export default function SearchResult({ coin, setList, show, loading, empty }) {
     })
       .then(res => {
         setData({
-          // id: coin.id,
           // rank: coin.market_cap_rank,
+          id: coin.id,
           name: coin.name,
           symbol: coin.symbol,
           thumb: coin.thumb,

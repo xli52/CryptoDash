@@ -20,7 +20,7 @@ export default function Nav() {
 
   function createList(coins) {
     if (coins.length === 0) {
-      setList([<SearchResult empty />]);
+      setList([<SearchResult key={0} empty />]);
     }
     if (coins.length > 0) {
       const list = coins.map((coin, index) => {
@@ -34,13 +34,12 @@ export default function Nav() {
 
   useEffect(() => {
     if (value) {
-      setList([<SearchResult loading />]);
+      setList([<SearchResult key={0} loading />]);
       axios({
         method: 'GET',
         url: `https://api.coingecko.com/api/v3/search?query=${value}`
       })
         .then(res => {
-          // console.log(res.data.coins);
           createList(res.data.coins);
         })
         .catch(e => {
@@ -68,6 +67,7 @@ export default function Nav() {
           value={value}
           onChange={handleChange}
           placeholder="Search here..."
+          autoFocus
         />
         {list.length !== 0 &&
           <div className="searchbar-results">
