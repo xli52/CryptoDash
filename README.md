@@ -1,5 +1,5 @@
-# Project
-CrypoDash is simple web app that enable users to search and view current and historical price data for any crypocurrency. The app was build by React connected with the CoinGecko API.
+# Project description
+CrypoDash is a simple web app that enable users to search and view current and historical price data for any crypocurrency. It provides 7-day price history of any cyptocurrency in your preferred fiat currency. It also display 24 hour change amount and change rate. The app was build by React with data from the CoinGecko API.
 
 # Final Product
 
