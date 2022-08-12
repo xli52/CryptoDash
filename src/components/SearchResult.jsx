@@ -1,9 +1,10 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React from "react";
 import './SearchResult.scss';
 import classNames from "classnames";
+import { useData } from "../contexts/DataContext";
 
-export default function SearchResult({ coin, show, loading, empty }) {
+export default function SearchResult({ coin, setList, show, loading, empty }) {
 
   const resultClass = classNames(
     'search-result',
@@ -12,12 +13,13 @@ export default function SearchResult({ coin, show, loading, empty }) {
     { 'result--loading': loading }
   );
 
-  const [data, setData] = useState({});
+  const { setData, currency } = useData();
 
   function handleClick() {
+    setList([]);
     axios({
       method: 'GET',
-      url: `https://api.coingecko.com/api/v3/coins/${coin.id}/market_chart?vs_currency=usd&days=6&interval=daily`
+      url: `https://api.coingecko.com/api/v3/coins/${coin.id}/market_chart?vs_currency=${currency}&days=7&interval=daily`
     })
       .then(res => {
         for (const price of res.data.prices.reverse()) {
@@ -25,7 +27,8 @@ export default function SearchResult({ coin, show, loading, empty }) {
           console.log(date.toDateString(), `$ ${price[1]}`)
         }
         setData({
-          id: coin.id,
+          // id: coin.id,
+          // rank: coin.market_cap_rank,
           name: coin.name,
           symbol: coin.symbol,
           thumb: coin.thumb,
@@ -42,7 +45,7 @@ export default function SearchResult({ coin, show, loading, empty }) {
       {show &&
         <>
           <div className="coin-info">
-            <img className="coin-thumb" src={coin.thumb}></img>
+            <img className="coin-thumb" src={coin.thumb} alt={coin.name}></img>
             <div className="coin-name">{`${coin.name} (${coin.symbol})`}</div>
           </div>
           <div className="coin-ranking">{`#${coin.market_cap_rank}`}</div>
@@ -54,7 +57,6 @@ export default function SearchResult({ coin, show, loading, empty }) {
       {loading &&
         <div className="loading-results"></div>
       }
-
     </div>
   );
 }
