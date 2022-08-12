@@ -7,7 +7,7 @@ CryptoDash is a simple web app that enable users to search and view current and 
 ### View 7-day price history
 !["Screenshot of price history table"](https://github.com/xli52/CryptoDash/blob/main/public/screenshots/price-history.png?raw=true)
 
-### Search and chose cyptocurrency
+### Search and choose cryptocurrency
 !["Screenshot of search function"](https://github.com/xli52/CryptoDash/blob/main/public/screenshots/search-function.png?raw=true)
 
 # Getting Started with the App
