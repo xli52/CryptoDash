@@ -67,7 +67,7 @@ export default function Nav() {
           type="text"
           value={value}
           onChange={handleChange}
-          placeholder="Search crypto coins..."
+          placeholder="Search here..."
         />
         {list.length !== 0 &&
           <div className="searchbar-results">

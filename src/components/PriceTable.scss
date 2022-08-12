@@ -1,5 +1,5 @@
 .main-content {
-  margin: 2rem 2rem;
+  margin: 0 2rem;
   display: flex;
   justify-content: center;
 
@@ -7,44 +7,59 @@
     width: 70vw;
     max-width: 1200px;
 
-    .table-title {
+    .coin-title {
       display: flex;
       align-items: center;
       font-weight: 500;
       border-bottom: solid 1px lightgray;
       padding-bottom: 1rem;
+      margin-top: 5rem;
 
       .coin-thumb {
-        width: 2rem;
-        height: 2rem;
+        width: 2.5rem;
+        height: 2.5rem;
         border-radius: 50%;
-        margin-right: 0.5rem;
+        margin-right: 1rem;
       }
+    }
+
+    .table-title {
+      margin-top: 2rem;
     }
 
     .price-table {
       width: 100%;
       margin-top: 2rem;
+      border-collapse: collapse;
+      border-bottom: solid 1.5px gray;
+      border-top: solid 1.5px gray;
 
-      .table-head {
-        padding-top: 0.5rem;
-        padding-bottom: 1rem;
-        font-size: 1.2rem;
+      .table-header {
+        border-bottom: solid 1.5px gray;
+
+        .table-head {
+          padding-top: 1rem;
+          padding-bottom: 1rem;
+          font-size: 1.2rem;
+        }
       }
 
       .table-row {
-        // border-bottom: solid 1px gray;s
+
+        &--dark {
+          background-color: rgb(242, 242, 242);
+        }
 
         .table-data {
-          padding: 0.5rem 0;
+          padding: 0.8rem 0;
           text-align: center;
           font-size: 1.1rem;
           font-weight: 300;
-  
+
           &--increase {
             color: rgb(9, 133, 81);
           }
-  
+
           &--decrease {
             color: rgb(207, 32, 47);
           }
@@ -56,9 +71,23 @@
 
 @media (max-width: 900px) {
   .main-content {
+
     .data-container {
       width: 100%;
     }
+  }
+}
 
+@media (max-width: 600px) {
+  .main-content {
+    margin: 0 1rem;
+
+    .data-container .price-table .table-header .table-head {
+      font-size: 1rem;
+    }
+
+    .data-container .price-table .table-row .table-data {
+      font-size: 0.9rem;
+    }
   }
 }

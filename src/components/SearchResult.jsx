@@ -22,10 +22,6 @@ export default function SearchResult({ coin, setList, show, loading, empty }) {
       url: `https://api.coingecko.com/api/v3/coins/${coin.id}/market_chart?vs_currency=${currency}&days=7&interval=daily`
     })
       .then(res => {
-        for (const price of res.data.prices.reverse()) {
-          let date = new Date(price[0]);
-          console.log(date.toDateString(), `$ ${price[1]}`)
-        }
         setData({
           // id: coin.id,
           // rank: coin.market_cap_rank,
