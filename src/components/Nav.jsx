@@ -23,9 +23,9 @@ export default function Nav() {
       setList([<SearchResult empty />]);
     }
     if (coins.length > 0) {
-      const list = coins.map(coin => {
+      const list = coins.map((coin, index) => {
         return (
-          <SearchResult key={coin.id} coin={coin} setList={setList} show />
+          <SearchResult key={index} coin={coin} setList={setList} show />
         );
       });
       setList(list);

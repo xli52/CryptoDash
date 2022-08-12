@@ -24,7 +24,7 @@ export default function PriceTable() {
           const date = new Date(price[0]);
 
           return (
-            <tr key={index} className={`table-row${index % 2 === 1 ? ' table-row--dark': ''}`}>
+            <tr key={index} className={`table-row${index % 2 === 1 ? ' table-row--dark' : ''}`}>
               <td className="table-data">{date.toDateString().split(' ').slice(1).join(' ')}</td>
               <td className="table-data">{days[date.getDay()]}</td>
               <td className="table-data">{`$${currPrice.toFixed(2)}`}</td>
@@ -38,17 +38,30 @@ export default function PriceTable() {
       setTable(table.reverse());
     }
 
+    if (!data.prices) {
+      setTable([
+        <tr key={0} className={'table-row table-row--dark'}>
+          <td className="table-data">{'-'}</td>
+          <td className="table-data">{'-'}</td>
+          <td className="table-data">{'-'}</td>
+          <td className="table-data">{'-'}</td>
+          <td className="table-data">{'-'}</td>
+        </tr>
+      ]);
+    }
   }, [data, currency]);
 
   return (
     <main className="main-content">
       <div className="data-container">
-        <h1 className="coin-title">
-          <img src={data.thumb} alt={data.name} className="coin-thumb" />
-          {`${data.name} (${data.symbol})`}
-        </h1>
+        {data.prices &&
+          <h1 className="coin-title">
+            <img src={data.thumb} alt={data.name} className="coin-thumb" />
+            {`${data.name} (${data.symbol})`}
+          </h1>
+        }
         <h2 className="table-title">
-          {`7-day Price History (${data.symbol}/${currency.toUpperCase()})`}
+          {`7-day Price History${data.prices ? ` (${data.symbol}/${currency.toUpperCase()})` : ''} `}
         </h2>
         <table className="price-table">
           <thead>
