@@ -9,13 +9,10 @@ export default function Nav() {
 
   const [value, setValue] = useState('');
   const [list, setList] = useState([]);
+  const [showList, setShowList] = useState(true);
 
   function handleSubmit(e) {
     e.preventDefault();
-  }
-
-  function handleChange(e) {
-    setValue(e.target.value);
   }
 
   function createList(coins) {
@@ -25,7 +22,7 @@ export default function Nav() {
     if (coins.length > 0) {
       const list = coins.map((coin, index) => {
         return (
-          <SearchResult key={index} coin={coin} setList={setList} show />
+          <SearchResult key={index} coin={coin} setShowList={setShowList} show />
         );
       });
       setList(list);
@@ -59,17 +56,19 @@ export default function Nav() {
         <FontAwesomeIcon icon={faBitcoinSign} className="logo-icon" />
         <div className="logo-name">CryptoDash</div>
       </div>
-      <form className="searchbar" onSubmit={handleSubmit}>
+      <form className="searchbar" onSubmit={e => e.preventDefault()}>
         <FontAwesomeIcon icon={faSearch} className="searchbar-icon" />
         <input
           className="searchbar-input"
           type="text"
           value={value}
-          onChange={handleChange}
+          onChange={e => setValue(e.target.value)}
           placeholder="Search here..."
           autoFocus
+          onFocus={() => setShowList(true)}
+          onBlur={() => setShowList(false)}
         />
-        {list.length !== 0 &&
+        {list.length !== 0 && showList &&
           <div className="searchbar-results">
             {list}
           </div>

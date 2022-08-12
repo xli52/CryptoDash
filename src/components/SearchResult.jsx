@@ -4,7 +4,7 @@ import './SearchResult.scss';
 import classNames from "classnames";
 import { useData } from "../contexts/DataContext";
 
-export default function SearchResult({ coin, setList, show, loading, empty }) {
+export default function SearchResult({ coin, setShowList, show, loading, empty }) {
 
   const resultClass = classNames(
     'search-result',
@@ -16,14 +16,13 @@ export default function SearchResult({ coin, setList, show, loading, empty }) {
   const { setData, currency } = useData();
 
   function handleClick() {
-    setList([]);
+    setShowList(false);
     axios({
       method: 'GET',
       url: `https://api.coingecko.com/api/v3/coins/${coin.id}/market_chart?vs_currency=${currency}&days=7&interval=daily`
     })
       .then(res => {
         setData({
-          // rank: coin.market_cap_rank,
           id: coin.id,
           name: coin.name,
           symbol: coin.symbol,
@@ -37,7 +36,7 @@ export default function SearchResult({ coin, setList, show, loading, empty }) {
   }
 
   return (
-    <div className={resultClass} onClick={show && handleClick} >
+    <div className={resultClass} onMouseDown={show && handleClick} >
       {show &&
         <>
           <div className="coin-info">
