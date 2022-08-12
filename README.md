@@ -4,9 +4,9 @@ CrypoDash is simple web app that enable users to search and view current and his
 # Final Product
 
 ### Provide 7-day price history of any cyptocurrency, display 24 hour change amount in your preferred fiat currency
-!["Screenshot of price history table"](https://github.com/xli52/final/blob/main/client/docs/images/home_page.png?raw=true)
+!["Screenshot of price history table"](https://github.com/xli52/CryptoDash/blob/main/public/screenshots/price-history.png?raw=true)
 ### Search and chose cyptocurrency
-!["Screenshot of search function"](https://github.com/xli52/final/blob/main/client/docs/images/home_page.png?raw=true)
+!["Screenshot of search function"](https://github.com/xli52/CryptoDash/blob/main/public/screenshots/search-function.png?raw=true)
 
 # Getting Started with the App
 
