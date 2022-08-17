@@ -13,5 +13,5 @@ CryptoDash is a simple web app that enable users to search and view current and 
 # Getting Started with the App
 
 1. Clone the repository to your local computer.
-2. Run `npm start`.
-3. Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+2. Run `npm install` to install all dependencies.
+3. Run `npm start` and open [http://localhost:3000](http://localhost:3000) to view it in your browser.
