@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from "react";
-import './Nav.scss';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch, faUser, faBitcoinSign, faBars, faClose } from '@fortawesome/free-solid-svg-icons';
+import "./Nav.scss";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faSearch,
+  faUser,
+  faBitcoinSign,
+  faBars,
+  faClose,
+} from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import SearchResult from "./SearchResult";
 
 export default function Nav() {
-
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState("");
   const [list, setList] = useState([]);
   const [showList, setShowList] = useState(true);
-
-  function handleSubmit(e) {
-    e.preventDefault();
-  }
 
   function createList(coins) {
     if (coins.length === 0) {
@@ -22,7 +23,12 @@ export default function Nav() {
     if (coins.length > 0) {
       const list = coins.map((coin, index) => {
         return (
-          <SearchResult key={index} coin={coin} setShowList={setShowList} show />
+          <SearchResult
+            key={index}
+            coin={coin}
+            setShowList={setShowList}
+            show
+          />
         );
       });
       setList(list);
@@ -33,21 +39,20 @@ export default function Nav() {
     if (value) {
       setList([<SearchResult key={0} loading />]);
       axios({
-        method: 'GET',
-        url: `https://api.coingecko.com/api/v3/search?query=${value}`
+        method: "GET",
+        url: `https://api.coingecko.com/api/v3/search?query=${value}`,
       })
-        .then(res => {
+        .then((res) => {
           createList(res.data.coins);
         })
-        .catch(e => {
+        .catch((e) => {
           console.error(e);
-        })
+        });
     }
 
     if (!value) {
       setList([]);
     }
-
   }, [value]);
 
   return (
@@ -56,26 +61,30 @@ export default function Nav() {
         <FontAwesomeIcon icon={faBitcoinSign} className="logo-icon" />
         <div className="logo-name">CryptoDash</div>
       </div>
-      <form className="searchbar" onSubmit={e => e.preventDefault()}>
+      <form className="searchbar" onSubmit={(e) => e.preventDefault()}>
         <FontAwesomeIcon icon={faSearch} className="searchbar-icon" />
         <input
           className="searchbar-input"
           type="text"
           value={value}
-          onChange={e => setValue(e.target.value)}
+          onChange={(e) => setValue(e.target.value)}
           placeholder="Search here..."
           autoFocus
           onFocus={() => setShowList(true)}
           onBlur={() => setShowList(false)}
         />
-        {list.length !== 0 && showList &&
-          <div className="searchbar-results">
-            {list}
-          </div>
-        }
-        {value &&
-          <FontAwesomeIcon icon={faClose} className="searchbar-clear" onClick={() => { setValue('') }} />
-        }
+        {list.length !== 0 && showList && (
+          <div className="searchbar-results">{list}</div>
+        )}
+        {value && (
+          <FontAwesomeIcon
+            icon={faClose}
+            className="searchbar-clear"
+            onClick={() => {
+              setValue("");
+            }}
+          />
+        )}
       </form>
       <div className="menu">
         <div className="menu-username">Xiang</div>

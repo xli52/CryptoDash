@@ -10,8 +10,7 @@
   align-items: center;
 
   padding: 1.2rem 3rem;
-  border-bottom: 1px solid #E2E2E2;
-  // background: linear-gradient(to right, #22c1c3, #fdbb2d);
+  border-bottom: 1px solid #e2e2e2;
 
   .logo {
     cursor: pointer;
@@ -28,7 +27,7 @@
       padding: 0.5rem;
       border-radius: 50%;
       color: white;
-      background-color: #f2a900
+      background-color: #f2a900;
     }
   }
 
@@ -54,7 +53,7 @@
       border: none;
       background-color: transparent;
 
-      &:focus{
+      &:focus {
         outline: none;
       }
     }
@@ -65,7 +64,7 @@
       left: 0%;
       width: 100%;
       max-height: 40vh;
-      box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
       overflow-y: auto;
     }
 
@@ -79,7 +78,6 @@
       }
     }
   }
-
 
   .menu {
     display: flex;
@@ -103,7 +101,7 @@
     &-bars {
       display: none;
       font-size: 1.1rem;
-      margin-left: 0.5rem;
+      margin-left: 1rem;
     }
   }
 }
@@ -125,13 +123,21 @@
 
 @media (max-width: 650px) {
   .navbar {
+    .logo-icon {
+      margin-right: 1rem;
+    }
+
     .logo-name {
       display: none;
     }
 
+    .searchbar {
+      width: 100%;
+    }
+
     .searchbar-input {
-      width: 50vw;
-      max-width: 600px;
+      width: 100%;
+      max-width: none;
     }
 
     .menu {
@@ -142,7 +148,7 @@
         display: none;
       }
       &-bars {
-        display: inline;
+        display: block;
       }
     }
   }
