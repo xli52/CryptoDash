@@ -5,7 +5,7 @@ const initStates = {
   market_cap_rank: 0,
   thumb: "",
   large: ""
-}
+};
 
 const coinReducer = (state = initStates, action) => {
 

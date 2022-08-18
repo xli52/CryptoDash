@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from "react";
 import "./PriceTable.scss";
-import { useSelector } from "react-redux";
 import { changeCurrency, fetchPrices } from "../redux/actions";
 import { connect } from "react-redux";
 
-function PriceTable({ fetchPrices, changeCurrency }) {
+function PriceTable({
+  fetchPrices,
+  changeCurrency,
+  coin,
+  priceData,
+  currency,
+}) {
   const days = [
     "Sunday",
     "Monday",
@@ -16,10 +21,6 @@ function PriceTable({ fetchPrices, changeCurrency }) {
   ];
 
   const [table, setTable] = useState([]);
-
-  const currency = useSelector((state) => state.currency);
-  const priceData = useSelector((state) => state.priceData);
-  const coin = useSelector((state) => state.coin);
 
   function handleChange(e) {
     const newCurrency = e.target.value;
@@ -137,6 +138,14 @@ function PriceTable({ fetchPrices, changeCurrency }) {
   );
 }
 
+const mapStateToProps = (state) => {
+  return {
+    coin: state.coin,
+    priceData: state.priceData,
+    currency: state.currency,
+  };
+};
+
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchPrices: (coin, currency) => dispatch(fetchPrices(coin, currency)),
@@ -144,4 +153,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(PriceTable);
+export default connect(mapStateToProps, mapDispatchToProps)(PriceTable);

@@ -2,7 +2,7 @@ import "./SearchResult.scss";
 import React from "react";
 import classNames from "classnames";
 import { fetchPrices, changeCoin } from "../redux/actions";
-import { connect, useSelector } from "react-redux";
+import { connect } from "react-redux";
 
 function SearchResult({
   coin,
@@ -12,9 +12,8 @@ function SearchResult({
   empty,
   fetchPrices,
   changeCoin,
+  currency,
 }) {
-  const currency = useSelector((state) => state.currency);
-
   const resultClass = classNames(
     "search-result",
     { "result--show": show },
@@ -45,6 +44,12 @@ function SearchResult({
   );
 }
 
+const mapStateToProps = (state) => {
+  return {
+    currency: state.currency,
+  };
+};
+
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchPrices: (coin, currency) => dispatch(fetchPrices(coin, currency)),
@@ -52,4 +57,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(SearchResult);
+export default connect(mapStateToProps, mapDispatchToProps)(SearchResult);
