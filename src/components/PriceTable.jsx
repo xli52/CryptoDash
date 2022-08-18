@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./PriceTable.scss";
 import { changeCurrency, fetchPrices } from "../redux/actions";
+import { getPriceTable } from "../helpers/priceHelper";
 import { connect } from "react-redux";
 
 function PriceTable({
@@ -10,22 +11,11 @@ function PriceTable({
   priceData,
   currency,
 }) {
-  const days = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-  ];
-
   const [table, setTable] = useState([]);
 
   function handleChange(e) {
     const newCurrency = e.target.value;
     changeCurrency(newCurrency);
-
     if (priceData.length > 0) {
       fetchPrices(coin, newCurrency);
     }
@@ -33,19 +23,10 @@ function PriceTable({
 
   useEffect(() => {
     if (priceData.length > 0) {
-      let prevPrice = priceData[0][1];
+      const priceTable = getPriceTable(priceData);
 
-      const table = priceData.map((price, index) => {
-        if (index !== 0) {
-          // Calculate price change and change rate
-          const currPrice = price[1];
-          const dailyChange = currPrice - prevPrice;
-          const dailyChangeRate = ((dailyChange / prevPrice) * 100).toFixed(2);
-          prevPrice = currPrice;
-
-          // Get date of price
-          const date = new Date(price[0]);
-
+      const table = priceTable.map(
+        ({ price, dailyChange, dailyChangeRate, date, day }, index) => {
           return (
             <tr
               key={index}
@@ -53,11 +34,9 @@ function PriceTable({
                 index % 2 === 1 ? " table-row--dark" : ""
               }`}
             >
-              <td className="table-data">
-                {date.toDateString().split(" ").slice(1).join(" ")}
-              </td>
-              <td className="table-data">{days[date.getDay()]}</td>
-              <td className="table-data">{`$${currPrice.toFixed(2)}`}</td>
+              <td className="table-data">{date}</td>
+              <td className="table-data">{day}</td>
+              <td className="table-data">{`$${price.toFixed(2)}`}</td>
               <td
                 className={`table-data table-data--${
                   dailyChange >= 0 ? "increase" : "decrease"
@@ -71,21 +50,9 @@ function PriceTable({
             </tr>
           );
         }
-      });
+      );
 
-      setTable(table.reverse());
-    }
-
-    if (priceData.length === 0) {
-      setTable([
-        <tr key={0} className={"table-row table-row--dark"}>
-          <td className="table-data">{"-"}</td>
-          <td className="table-data">{"-"}</td>
-          <td className="table-data">{"-"}</td>
-          <td className="table-data">{"-"}</td>
-          <td className="table-data">{"-"}</td>
-        </tr>,
-      ]);
+      setTable(table);
     }
   }, [priceData]);
 
@@ -131,7 +98,19 @@ function PriceTable({
               </th>
             </tr>
           </thead>
-          <tbody className="price-table-body">{table}</tbody>
+          <tbody className="price-table-body">
+            {priceData.length > 0 ? (
+              table
+            ) : (
+              <tr key={0} className={"table-row table-row--dark"}>
+                <td className="table-data">{"-"}</td>
+                <td className="table-data">{"-"}</td>
+                <td className="table-data">{"-"}</td>
+                <td className="table-data">{"-"}</td>
+                <td className="table-data">{"-"}</td>
+              </tr>
+            )}
+          </tbody>
         </table>
       </div>
     </main>
