@@ -1,14 +1,16 @@
 import React from "react";
 import Nav from "./components/Nav";
 import PriceTable from "./components/PriceTable";
-import DataProvider from "./contexts/DataContext";
+// import DataProvider from "./contexts/DataContext";
 
 function App() {
   return (
-    <DataProvider>
+    // <DataProvider>
+    <>
       <Nav />
       <PriceTable />
-    </DataProvider>
+    </>
+    // </DataProvider>
   );
 }
 

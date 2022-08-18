@@ -10,7 +10,8 @@ export default function DataProvider({ children }) {
     <DataContext.Provider value={{ data, setData, currency, setCurrency }} >
       {children}
     </DataContext.Provider>
-  )
+  );
+
 };
 
 export function useData() {

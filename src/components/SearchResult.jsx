@@ -1,43 +1,34 @@
-import axios from "axios";
+import "./SearchResult.scss";
 import React from "react";
-import './SearchResult.scss';
 import classNames from "classnames";
-import { useData } from "../contexts/DataContext";
+import { fetchPrices } from "../redux/actions";
+import { connect, useSelector } from "react-redux";
 
-export default function SearchResult({ coin, setShowList, show, loading, empty }) {
+function SearchResult({
+  coin,
+  setShowList,
+  show,
+  loading,
+  empty,
+  fetchPrices,
+}) {
+  const currency = useSelector((state) => state.currency);
 
   const resultClass = classNames(
-    'search-result',
-    { 'result--show': show },
-    { 'result--empty': empty },
-    { 'result--loading': loading }
+    "search-result",
+    { "result--show": show },
+    { "result--empty": empty },
+    { "result--loading": loading }
   );
 
-  const { setData, currency } = useData();
-
   function handleClick() {
+    fetchPrices(coin, currency);
     setShowList(false);
-    axios({
-      method: 'GET',
-      url: `https://api.coingecko.com/api/v3/coins/${coin.id}/market_chart?vs_currency=${currency}&days=7&interval=daily`
-    })
-      .then(res => {
-        setData({
-          id: coin.id,
-          name: coin.name,
-          symbol: coin.symbol,
-          thumb: coin.thumb,
-          prices: res.data.prices.reverse()
-        });
-      })
-      .catch(e => {
-        console.error(e);
-      })
   }
 
   return (
-    <div className={resultClass} onMouseDown={show && handleClick} >
-      {show &&
+    <div className={resultClass} onMouseDown={show && handleClick}>
+      {show && (
         <>
           <div className="coin-info">
             <img className="coin-thumb" src={coin.thumb} alt={coin.name}></img>
@@ -45,13 +36,17 @@ export default function SearchResult({ coin, setShowList, show, loading, empty }
           </div>
           <div className="coin-ranking">{`#${coin.market_cap_rank}`}</div>
         </>
-      }
-      {empty &&
-        <div className="no-results">No Results Found</div>
-      }
-      {loading &&
-        <div className="loading-results"></div>
-      }
+      )}
+      {empty && <div className="no-results">No Results Found</div>}
+      {loading && <div className="loading-results"></div>}
     </div>
   );
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchPrices: (coin, currency) => dispatch(fetchPrices(coin, currency)),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(SearchResult);
