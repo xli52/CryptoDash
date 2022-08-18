@@ -14,6 +14,13 @@ export const changeCoin = (coin) => {
   }
 }
 
+const updatePriceData = (priceData) => {
+  return {
+    type: "UPDATE_PRICE_DATA",
+    payload: priceData
+  }
+}
+
 export const fetchPrices = (coin, currency) => {
 
   return function (dispatch) {
@@ -23,11 +30,7 @@ export const fetchPrices = (coin, currency) => {
     })
       .then((res) => {
         const priceData = res.data.prices.reverse();
-
-        dispatch({
-          type: "UPDATE_DATA",
-          payload: priceData
-        });
+        dispatch(updatePriceData(priceData));
       })
       .catch((e) => {
         console.error(e);
