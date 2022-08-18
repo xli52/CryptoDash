@@ -1,7 +1,7 @@
 import "./SearchResult.scss";
 import React from "react";
 import classNames from "classnames";
-import { fetchPrices } from "../redux/actions";
+import { fetchPrices, changeCoin } from "../redux/actions";
 import { connect, useSelector } from "react-redux";
 
 function SearchResult({
@@ -11,6 +11,7 @@ function SearchResult({
   loading,
   empty,
   fetchPrices,
+  changeCoin,
 }) {
   const currency = useSelector((state) => state.currency);
 
@@ -22,6 +23,7 @@ function SearchResult({
   );
 
   function handleClick() {
+    changeCoin(coin);
     fetchPrices(coin, currency);
     setShowList(false);
   }
@@ -46,6 +48,7 @@ function SearchResult({
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchPrices: (coin, currency) => dispatch(fetchPrices(coin, currency)),
+    changeCoin: (coin) => dispatch(changeCoin(coin)),
   };
 };
 

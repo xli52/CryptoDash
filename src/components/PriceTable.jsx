@@ -18,22 +18,23 @@ function PriceTable({ fetchPrices, changeCurrency }) {
   const [table, setTable] = useState([]);
 
   const currency = useSelector((state) => state.currency);
-  const coinData = useSelector((state) => state.coinData);
+  const priceData = useSelector((state) => state.priceData);
+  const coin = useSelector((state) => state.coin);
 
   function handleChange(e) {
     const newCurrency = e.target.value;
     changeCurrency(newCurrency);
 
-    if (coinData.prices.length > 0) {
-      fetchPrices(coinData, newCurrency);
+    if (priceData.length > 0) {
+      fetchPrices(coin, newCurrency);
     }
   }
 
   useEffect(() => {
-    if (coinData.prices.length > 0) {
-      let prevPrice = coinData.prices[0][1];
+    if (priceData.length > 0) {
+      let prevPrice = priceData[0][1];
 
-      const table = coinData.prices.map((price, index) => {
+      const table = priceData.map((price, index) => {
         if (index !== 0) {
           // Calculate price change and change rate
           const currPrice = price[1];
@@ -74,7 +75,7 @@ function PriceTable({ fetchPrices, changeCurrency }) {
       setTable(table.reverse());
     }
 
-    if (coinData.prices.length === 0) {
+    if (priceData.length === 0) {
       setTable([
         <tr key={0} className={"table-row table-row--dark"}>
           <td className="table-data">{"-"}</td>
@@ -85,26 +86,22 @@ function PriceTable({ fetchPrices, changeCurrency }) {
         </tr>,
       ]);
     }
-  }, [coinData]);
+  }, [priceData]);
 
   return (
     <main className="main-content">
       <div className="data-container">
-        {coinData.prices.length > 0 && (
+        {priceData.length > 0 && (
           <h1 className="coin-title">
-            <img
-              src={coinData.thumb}
-              alt={coinData.name}
-              className="coin-thumb"
-            />
-            {`${coinData.name} (${coinData.symbol})`}
+            <img src={coin.thumb} alt={coin.name} className="coin-thumb" />
+            {`${coin.name} (${coin.symbol})`}
           </h1>
         )}
         <div className="table-topbar">
           <h2 className="table-title">
             {`7-day Price History${
-              coinData.prices.length > 0
-                ? ` (${coinData.symbol}/${currency.toUpperCase()})`
+              priceData.length > 0
+                ? ` (${coin.symbol}/${currency.toUpperCase()})`
                 : ""
             } `}
           </h2>

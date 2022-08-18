@@ -7,6 +7,13 @@ export const changeCurrency = (currency) => {
   }
 }
 
+export const changeCoin = (coin) => {
+  return {
+    type: 'CHANGE_COIN',
+    payload: coin
+  }
+}
+
 export const fetchPrices = (coin, currency) => {
 
   return function (dispatch) {
@@ -15,18 +22,11 @@ export const fetchPrices = (coin, currency) => {
       url: `https://api.coingecko.com/api/v3/coins/${coin.id}/market_chart?vs_currency=${currency}&days=7&interval=daily`,
     })
       .then((res) => {
-
-        const coinData = {
-          id: coin.id,
-          name: coin.name,
-          symbol: coin.symbol,
-          thumb: coin.thumb,
-          prices: res.data.prices.reverse()
-        };
+        const priceData = res.data.prices.reverse();
 
         dispatch({
           type: "UPDATE_DATA",
-          payload: coinData
+          payload: priceData
         });
       })
       .catch((e) => {

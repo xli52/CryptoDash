@@ -1,7 +1,12 @@
 import { combineReducers } from "redux";
-import coinDataReducer from "./coinData";
+import priceDataReducer from "./priceData";
 import currencyReducer from "./currency";
+import coinReducer from "./coin";
 
-const rootReducer = combineReducers({ coinData: coinDataReducer, currency: currencyReducer });
+const rootReducer = combineReducers({
+  coin: coinReducer,
+  priceData: priceDataReducer,
+  currency: currencyReducer
+});
 
 export default rootReducer;
