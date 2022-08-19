@@ -1,4 +1,5 @@
 export const getPriceTable = (priceData) => {
+
   const days = [
     "Sunday",
     "Monday",
@@ -20,15 +21,15 @@ export const getPriceTable = (priceData) => {
       prevPrice = price;
       // Get date of price
       const newDate = new Date(data[0]);
-      const date = newDate.toDateString().split(" ").slice(1).join(" ")
+      const date = newDate.toDateString().split(" ").slice(1).join(" ");
       const day = days[newDate.getDay()];
+      const time = newDate.toLocaleTimeString();
 
-      return { price, dailyChange, dailyChangeRate, date, day }
+      return { price, dailyChange, dailyChangeRate, date, day, time }
     } else {
       return null;
     }
-
-  })
+  });
 
   return priceTable.slice(1).reverse();
 }

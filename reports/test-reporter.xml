@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testExecutions version="1">
+    <file path="/Users/xiangli/Documents/Personal/CryptoDash/src/components/tests/Nav.test.js">
+        <testCase name="Nav Should render Nav" duration="41">
+            <failure message="Error: expect(jest.fn()).toHaveBeenCalledTimes(expected)"><![CDATA[Error: expect(jest.fn()).toHaveBeenCalledTimes(expected)
+
+Expected number of calls: 1
+Received number of calls: 0
+    at Object.<anonymous> (/Users/xiangli/Documents/Personal/CryptoDash/src/components/tests/Nav.test.js:44:23)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)]]></failure>
+        </testCase>
+    </file>
+</testExecutions>

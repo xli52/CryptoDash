@@ -56,7 +56,7 @@ export default function Nav() {
   }, [value]);
 
   return (
-    <nav className="navbar">
+    <nav className="navbar" data-testid="navbar">
       <div className="logo">
         <FontAwesomeIcon icon={faBitcoinSign} className="logo-icon" />
         <div className="logo-name">CryptoDash</div>
@@ -74,7 +74,9 @@ export default function Nav() {
           onBlur={() => setShowList(false)}
         />
         {list.length !== 0 && showList && (
-          <div className="searchbar-results">{list}</div>
+          <div className="searchbar-results" data-testid="searchbar-results">
+            {list}
+          </div>
         )}
         {value && (
           <FontAwesomeIcon

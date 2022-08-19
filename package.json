@@ -45,7 +45,10 @@
   },
   "devDependencies": {
     "@babel/core": "^7.18.6",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.3.0",
     "babel-loader": "^8.2.5",
+    "jest-mock-axios": "^4.6.1",
     "jest-sonar-reporter": "^2.0.0",
     "sass": "^1.54.4"
   },

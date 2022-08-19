@@ -26,7 +26,7 @@ function PriceTable({
       const priceTable = getPriceTable(priceData);
 
       const table = priceTable.map(
-        ({ price, dailyChange, dailyChangeRate, date, day }, index) => {
+        ({ price, dailyChange, dailyChangeRate, date, day, time }, index) => {
           return (
             <tr
               key={index}
@@ -35,6 +35,7 @@ function PriceTable({
               }`}
             >
               <td className="table-data">{date}</td>
+              <td className="table-data">{time}</td>
               <td className="table-data">{day}</td>
               <td className="table-data">{`$${price.toFixed(2)}`}</td>
               <td
@@ -76,6 +77,7 @@ function PriceTable({
           <select className="currency-seletor" onChange={handleChange}>
             <option value="usd">USD</option>
             <option value="cad">CAD</option>
+            <option value="eur">EUR</option>
           </select>
         </div>
         <table className="price-table">
@@ -83,6 +85,9 @@ function PriceTable({
             <tr className="table-header">
               <th scope="col" className="table-head">
                 Date
+              </th>
+              <th scope="col" className="table-head">
+                Time
               </th>
               <th scope="col" className="table-head">
                 Day of week
