@@ -1,3 +1,5 @@
+<p align="left"> <img src="https://komarev.com/ghpvc/?username=xli52&label=Profile%20views&color=0e75b6&style=flat" alt="xli52" /> </p>
+
 # Project description
 
 CryptoDash is a simple web app that enable users to search and view current and historical price data for any cryptocurrency. It provides 7-day price history of any cryptocurrency in your preferred fiat currency. It also display 24 hour change amount and change rate. The app was build by React with data from the CoinGecko API.
