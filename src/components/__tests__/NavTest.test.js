@@ -1,9 +1,9 @@
-import { render, fireEvent, findByTestId, waitFor } from '@testing-library/react';
+import { render, fireEvent, cleanup } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import rootReducer from '../../redux/reducers';
 import Nav from '../Nav';
-import axios from 'axios';
+import axios from '../../__mocks__/axios';
 
 let navbar;
 
@@ -15,9 +15,7 @@ beforeEach(() => {
   );
 });
 
-afterEach(() => {
-  navbar = null;
-});
+afterEach(cleanup);
 
 describe('Tests for the Navbar component', () => {
 

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testExecutions version="1">
-    <file path="/Users/xiangli/Documents/Personal/CryptoDash/src/components/__tests__/NavTest.test.js">
-        <testCase name="Tests for the Navbar component Should render Navbar" duration="34"/>
-        <testCase name="Tests for the Navbar component Navbar should have input field" duration="5"/>
-        <testCase name="Tests for the Navbar component Input field should display typed text" duration="31"/>
-        <testCase name="Tests for the Navbar component Should display search result list from an axios api call" duration="7"/>
-    </file>
     <file path="/Users/xiangli/Documents/Personal/CryptoDash/src/components/__tests__/Nav.test.js">
         <testCase name="Nav Should render Nav" duration="0"/>
+    </file>
+    <file path="/Users/xiangli/Documents/Personal/CryptoDash/src/components/__tests__/NavTest.test.js">
+        <testCase name="Tests for the Navbar component Should render Navbar" duration="37"/>
+        <testCase name="Tests for the Navbar component Navbar should have input field" duration="6"/>
+        <testCase name="Tests for the Navbar component Input field should display typed text" duration="33"/>
+        <testCase name="Tests for the Navbar component Should display search result list from an axios api call" duration="7"/>
     </file>
 </testExecutions>
