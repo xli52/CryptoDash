@@ -38,10 +38,8 @@ export default function Nav() {
   useEffect(() => {
     if (value) {
       setList([<SearchResult key={0} loading />]);
-      axios({
-        method: "GET",
-        url: `https://api.coingecko.com/api/v3/search?query=${value}`,
-      })
+      axios
+        .get(`https://api.coingecko.com/api/v3/search?query=${value}`)
         .then((res) => {
           createList(res.data.coins);
         })
