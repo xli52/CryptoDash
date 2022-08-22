@@ -2,7 +2,7 @@ import Nav from "../Nav";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
 import rootReducer from '../../redux/reducers';
-import { render, screen, fireEvent, cleanup } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import axios from "axios";
 
 const store = createStore(rootReducer, {});
@@ -11,7 +11,7 @@ const Wrapper = ({ children }) => (
   <Provider store={store}>{children}</Provider>
 );
 
-describe("Nav", () => {
+describe.skip("Nav", () => {
   test("Should render Nav", async () => {
     axios.get.mockResolvedValueOnce({
       data: {

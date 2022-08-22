@@ -72,6 +72,7 @@ export default function Nav() {
           autoFocus
           onFocus={() => setShowList(true)}
           onBlur={() => setShowList(false)}
+          data-testid="searchbar-input"
         />
         {list.length !== 0 && showList && (
           <div className="searchbar-results" data-testid="searchbar-results">
